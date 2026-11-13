@@ -1,0 +1,48 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header>
+  <nav>
+    <a href="/" class="logo">Jan Hernandez</a>
+    <ul>
+      <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Inicio</a></li>
+      <li><a href="/proyectos" class={currentPath === '/proyectos' ? 'active' : ''}>Proyectos</a></li>
+      <li><a href="/sobre-mi" class={currentPath === '/sobre-mi' ? 'active' : ''}>Sobre mí</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  header {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 2rem;
+  }
+  nav {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-weight: bold;
+    text-decoration: none;
+    color: #111827;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+    color: #4b5563;
+  }
+  a:hover, a.active {
+    color: #2563eb;
+    font-weight: 600;
+  }
+</style>
