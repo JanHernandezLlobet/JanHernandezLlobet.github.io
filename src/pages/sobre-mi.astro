@@ -6,22 +6,25 @@ const hobbies = [
     number: '01',
     title: 'Un hobby que disfruto',
     description: 'Cuenta aquí qué te gusta hacer, cómo empezaste y qué es lo que más disfrutas de esta actividad.',
-    imageLabel: 'Añade una foto de este hobby',
-    imagePosition: 'left',
+    imageLabel: 'Añade una foto panorámica para este hobby',
+    imagePath: '/images/hobby-01-portada.jpg',
+    extraImages: ['/images/hobby-01-1.jpg', '/images/hobby-01-2.jpg', '/images/hobby-01-3.jpg'],
   },
   {
     number: '02',
     title: 'Otra de mis pasiones',
     description: 'Describe otro hobby con una anécdota, un lugar especial o algo que hayas aprendido gracias a él.',
-    imageLabel: 'Añade una foto de este hobby',
-    imagePosition: 'right',
+    imageLabel: 'Añade una foto panorámica para este hobby',
+    imagePath: '/images/hobby-02-portada.jpg',
+    extraImages: ['/images/hobby-02-1.jpg', '/images/hobby-02-2.jpg', '/images/hobby-02-3.jpg'],
   },
   {
     number: '03',
     title: 'Algo que me inspira',
     description: 'Puedes usar este espacio para compartir una tercera afición y lo que aporta a tu día a día.',
-    imageLabel: 'Añade una foto de este hobby',
-    imagePosition: 'left',
+    imageLabel: 'Añade una foto panorámica para este hobby',
+    imagePath: '/images/hobby-03-portada.jpg',
+    extraImages: ['/images/hobby-03-1.jpg', '/images/hobby-03-2.jpg', '/images/hobby-03-3.jpg'],
   },
 ];
 ---
@@ -53,20 +56,26 @@ const hobbies = [
       </header>
 
       {hobbies.map((hobby) => (
-        <article class:list={['hobby-row', hobby.imagePosition === 'right' && 'image-right']}>
-          <div class="hobby-image" role="img" aria-label={hobby.imageLabel}>
-            <span class="image-number">{hobby.number}</span>
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="9" y="11" width="46" height="42" rx="5" />
-              <circle cx="23" cy="25" r="5" />
-              <path d="m12 47 14-13 9 8 7-6 10 11" />
-            </svg>
-            <span class="image-label">{hobby.imageLabel}</span>
+        <article class="hobby-section">
+          <div class="hobby-cover" style={`--cover-image: url('${hobby.imagePath}')`} role="img" aria-label={hobby.imageLabel}>
+            <div class="cover-content">
+              <span class="image-number">{hobby.number}</span>
+              <h3>{hobby.title}</h3>
+              <span class="image-label">Añade aquí la foto de portada</span>
+            </div>
           </div>
-          <div class="hobby-copy">
-            <p class="eyebrow">Hobby {hobby.number}</p>
-            <h3>{hobby.title}</h3>
-            <p>{hobby.description}</p>
+          <div class="hobby-details">
+            <div class="hobby-copy">
+              <p class="eyebrow">Hobby {hobby.number}</p>
+              <p>{hobby.description}</p>
+            </div>
+            <div class="hobby-gallery" aria-label={`Más fotos: ${hobby.title}`}>
+              {hobby.extraImages.map((imagePath, index) => (
+                <div class="gallery-placeholder" style={`--gallery-image: url('${imagePath}')`} role="img" aria-label={`Añade la foto ${index + 1} de ${hobby.title}`}>
+                  <span>Foto {index + 1}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </article>
       ))}
@@ -75,7 +84,7 @@ const hobbies = [
 </Layout>
 
 <style>
-  .about-page { --ink: #111827; --muted: #4b5563; --accent: #2563eb; }
+  .about-page { --ink: #111827; --muted: #4b5563; --accent: #2563eb; width: min(1200px, calc(100vw - 3rem)); position: relative; left: 50%; transform: translateX(-50%); }
   .intro { display: grid; grid-template-columns: minmax(230px, 0.85fr) 1.15fr; align-items: center; gap: clamp(2rem, 7vw, 5rem); padding: 1rem 0 5rem; }
   .portrait-placeholder { min-height: 330px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; text-align: center; color: var(--muted); background: linear-gradient(145deg, #eff6ff, #f3f4f6); border: 1px dashed #cbd5e1; border-radius: 1.25rem; }
   .portrait-placeholder svg { width: 72px; fill: none; stroke: #94a3b8; stroke-width: 3; stroke-linecap: round; }
@@ -93,21 +102,27 @@ const hobbies = [
   .section-heading { margin: 0 auto 3rem; text-align: center; }
   .section-heading h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
   .section-heading > p:last-child { color: var(--muted); }
-  .hobby-row { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 7vw, 5rem); padding: 2rem 0 4rem; }
-  .hobby-row.image-right .hobby-image { order: 2; }
-  .hobby-image { position: relative; min-height: 270px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; overflow: hidden; color: #64748b; background: linear-gradient(135deg, #f3f4f6, #eff6ff); border-radius: 1.25rem; }
-  .hobby-image svg { width: 58px; fill: none; stroke: #94a3b8; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .hobby-section { margin: 0 0 4rem; }
+  .hobby-cover { min-height: clamp(340px, 48vw, 540px); display: flex; align-items: flex-end; overflow: hidden; color: white; background-image: linear-gradient(to top, rgba(17, 24, 39, .96) 0%, rgba(17, 24, 39, .58) 28%, rgba(17, 24, 39, .08) 72%), var(--cover-image), linear-gradient(135deg, #dbeafe, #e5e7eb 55%, #d1fae5); background-position: center; background-size: cover; border-radius: 1.25rem; }
+  .cover-content { width: 100%; padding: clamp(1.5rem, 5vw, 3.5rem); }
+  .cover-content h3 { max-width: 850px; margin: .65rem 0; color: white; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1.02; text-shadow: 0 2px 24px rgba(0,0,0,.3); }
+  .cover-content .image-number { position: static; color: #e5e7eb; }
+  .cover-content .image-label { color: #e5e7eb; font-size: .85rem; }
   .image-number { position: absolute; top: 1rem; left: 1.2rem; color: #94a3b8; font: 500 .8rem monospace; }
-  .image-label { font-size: .9rem; }
-  .hobby-copy h3 { margin: 0 0 .8rem; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .hobby-details { display: grid; grid-template-columns: minmax(230px, .8fr) 1.2fr; align-items: start; gap: clamp(2rem, 6vw, 5rem); padding: 2rem clamp(.25rem, 2vw, 1.5rem) 0; }
   .hobby-copy > p:last-child { max-width: 34rem; margin: 0; color: var(--muted); line-height: 1.8; }
+  .hobby-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+  .gallery-placeholder { min-height: 135px; display: flex; align-items: flex-end; padding: .8rem; color: #4b5563; font-size: .8rem; background-image: linear-gradient(to top, rgba(255,255,255,.88), rgba(255,255,255,.08) 65%), var(--gallery-image), linear-gradient(135deg, #eff6ff, #f3f4f6); background-position: center; background-size: cover; border-radius: .8rem; }
   @media (max-width: 640px) {
-    .intro, .hobby-row { grid-template-columns: 1fr; gap: 1.5rem; }
+    .about-page { width: calc(100vw - 2rem); }
+    .intro { grid-template-columns: 1fr; gap: 1.5rem; }
     .intro { padding-bottom: 3.5rem; }
     .portrait-placeholder { min-height: 260px; }
-    .hobby-row { padding: 1rem 0 3rem; }
-    .hobby-row.image-right .hobby-image { order: initial; }
-    .hobby-image { min-height: 220px; }
+    .hobby-section { margin-bottom: 3rem; }
+    .hobby-cover { min-height: 320px; border-radius: 1rem; }
+    .hobby-details { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem .25rem 0; }
+    .hobby-gallery { gap: .5rem; }
+    .gallery-placeholder { min-height: 100px; padding: .55rem; font-size: .7rem; }
     .section-heading { margin-bottom: 2rem; }
   }
 </style>
