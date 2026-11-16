@@ -14,7 +14,11 @@
     cursor: pointer;
     font-size: 1rem;
     line-height: 1;
+    color: var(--text-primary);
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
   }
+  button:hover { border-color: var(--accent-primary); }
+  button:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
 
   /* Muestra el sol en modo noche y la luna en modo día */
   :global([data-theme="dark"]) .icon-moon { display: none; }

@@ -1,26 +1,25 @@
 ---
+import ThemeToggle from '../components/ThemeToggle.astro';
 const currentPath = Astro.url.pathname;
 ---
-
-import ThemeToggle from '../components/ThemeToggle.astro';
-
 
 <header>
   <nav>
     <a href="/" class="logo">Jan Hernandez</a>
     <ul>
       <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Inicio</a></li>
-      <li><a href="/proyectos" class={currentPath === '/proyectos' ? 'active' : ''}>Proyectos</a></li>
-      <li><a href="/sobre-mi" class={currentPath === '/sobre-mi' ? 'active' : ''}>Sobre mí</a></li>
-      <ThemeToggle>
+      <li><a href="/proyectos" class={currentPath === '/proyectos/' || currentPath === '/proyectos' ? 'active' : ''}>Proyectos</a></li>
+      <li><a href="/sobre-mi" class={currentPath === '/sobre-mi/' || currentPath === '/sobre-mi' ? 'active' : ''}>Sobre mí</a></li>
+      <li class="theme-control"><ThemeToggle /></li>
     </ul>
   </nav>
 </header>
 
 <style>
   header {
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border-color);
     padding: 1rem 2rem;
+    background: var(--bg-primary);
   }
   nav {
     max-width: 900px;
@@ -32,7 +31,7 @@ import ThemeToggle from '../components/ThemeToggle.astro';
   .logo {
     font-weight: bold;
     text-decoration: none;
-    color: #111827;
+    color: var(--text-primary);
   }
   ul {
     list-style: none;
@@ -43,10 +42,16 @@ import ThemeToggle from '../components/ThemeToggle.astro';
   }
   a {
     text-decoration: none;
-    color: #4b5563;
+    color: var(--text-secondary);
   }
   a:hover, a.active {
-    color: #2563eb;
+    color: var(--accent-primary);
     font-weight: 600;
+  }
+  .theme-control { display: flex; align-items: center; }
+  @media (max-width: 560px) {
+    header { padding: 1rem; }
+    nav { align-items: flex-start; gap: 1rem; }
+    ul { flex-wrap: wrap; justify-content: flex-end; gap: .8rem; }
   }
 </style>

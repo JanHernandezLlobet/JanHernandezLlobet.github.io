@@ -41,18 +41,18 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
 
 <style>
   .card {
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 12px var(--shadow-color);
   }
   .card-header {
     display: flex;
@@ -64,15 +64,15 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
   h3 {
     margin: 0;
     font-size: 1.2rem;
-    color: #111827;
+    color: var(--text-primary);
   }
   .year {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
     font-family: monospace;
   }
   .description {
-    color: #4b5563;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0 0 1.25rem 0;
@@ -85,8 +85,8 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
     margin-bottom: 1.25rem;
   }
   .tag {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
     font-size: 0.75rem;
     font-weight: 500;
     padding: 0.25rem 0.6rem;
@@ -96,12 +96,12 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
   .links {
     display: flex;
     gap: 1.25rem;
-    border-top: 1px solid #f3f4f6;
+    border-top: 1px solid var(--border-color);
     padding-top: 1rem;
     font-size: 0.9rem;
   }
   a {
-    color: #2563eb;
+    color: var(--accent-primary);
     text-decoration: none;
     font-weight: 500;
   }
@@ -109,6 +109,6 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
     text-decoration: underline;
   }
   .demo-link {
-    color: #059669;
+    color: var(--accent-secondary);
   }
 </style>
