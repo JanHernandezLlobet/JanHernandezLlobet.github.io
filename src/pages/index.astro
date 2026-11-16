@@ -1,8 +1,48 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HobbySection from '../components/HobbySection.astro';
+
+const hobbies = [
+  {
+    title: "Senderismo",
+    description: "Explorando rutas de alta montaña y senderos naturales los fines de semana. Perderse en los Pirineos es mi desconexión favorita.",
+    imageUrl: "/images/senderismo.jpg",
+    tagColor: "#c2410c" // Tono anaranjado natural
+  },
+  {
+    title: "Codificación",
+    description: "Desarrollando proyectos personales y explorando nuevas tecnologías. Me encanta trastear con inteligencia artificial y automatizaciones.",
+    imageUrl: "/images/codigo.jpg",
+    tagColor: "#0d9488" // Tono verde/turquesa
+  },
+  {
+    title: "Fotografía",
+    description: "Capturando pequeños instantes, paisajes y la luz natural de las ciudades. La cámara me obliga a mirar el mundo de otra forma.",
+    imageUrl: "/images/fotografia.jpg",
+    tagColor: "#2563eb" // Tono azul
+  }
+];
 ---
 
-<Layout title="Inicio | Jan Hernandez" description="Página principal">
-  <h1>Bienvenido a mi web</h1>
-  <p>Aquí compartiré mis proyectos y artículos.</p>
+<Layout title="Mis Hobbies y Pasiones">
+  <div class="hobbies-container">
+    {hobbies.map((hobby, index) => (
+      <HobbySection
+        index={index}
+        title={hobby.title}
+        description={hobby.description}
+        imageUrl={hobby.imageUrl}
+        tagColor={hobby.tagColor}
+      />
+    ))}
+  </div>
 </Layout>
+
+<style>
+  .hobbies-container {
+    display: flex;
+    flex-direction: column;
+    /* Elimina márgenes para que las secciones se toquen entre sí */
+    gap: 0; 
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+interface Props {
+  index: number; // Lo usaremos para saber si es par o impar
+  title: string;
+  description: string;
+  imageUrl: string;
+  tagColor?: string; // Por si quieres dar un color personalizado al título (ej. #d97706, #0d9488)
+}
+
+const { index, title, description, imageUrl, tagColor = "#3b82f6" } = Astro.props;
+const isEven = index % 2 === 0;
+---
+
+<section class:list={["hobby-section", { "reverse": !isEven }]}>
+  <!-- Bloque de imagen con máscara de degradado -->
+  <div 
+    class="image-wrapper" 
+    style={`background-image: url('${imageUrl}');`}
+  >
+    <div class="gradient-overlay"></div>
+  </div>
+
+  <!-- Bloque de contenido -->
+  <div class="content-wrapper">
+    <div class="text-content">
+      <h2 style={`color: ${tagColor};`}>{title}</h2>
+      <p>{description}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hobby-section {
+    width: 100vw;
+    height: 50vh; /* Altura de la sección, ajustable */
+    min-height: 400px;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    
+    display: flex;
+    flex-direction: row; /* Imagen izquierda, texto derecha por defecto */
+    background-color: #1a1e24; /* Color de fondo oscuro continuo */
+    overflow: hidden;
+  }
+
+  /* Si es impar, invertimos el orden de las columnas */
+  .hobby-section.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .image-wrapper {
+    flex: 1.2; /* Ocupa un poco más de la mitad */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  /* La clave: la máscara que degrada la imagen hacia el centro */
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    /* Degradado de transparente (izquierda) a oscuro (derecha) */
+    background: linear-gradient(to right, transparent 50%, #1a1e24 100%);
+  }
+
+  /* Si la sección está invertida, el degradado va en sentido contrario */
+  .hobby-section.reverse .gradient-overlay {
+    background: linear-gradient(to left, transparent 50%, #1a1e24 100%);
+  }
+
+  .content-wrapper {
+    flex: 1; /* Ocupa el espacio restante */
+    display: flex;
+    align-items: center;
+    padding: 3rem;
+    box-sizing: border-box;
+    z-index: 2; /* Por encima del desvanecimiento */
+  }
+
+  .text-content {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .hobby-section.reverse .text-content {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1rem 0;
+  }
+
+  p {
+    color: #9ca3af;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Responsivo para móviles */
+  @media (max-width: 768px) {
+    .hobby-section, .hobby-section.reverse {
+      flex-direction: column; /* Apilados verticalmente */
+      height: auto;
+    }
+    .image-wrapper {
+      height: 250px;
+      flex: none;
+      width: 100%;
+    }
+    .gradient-overlay {
+      background: linear-gradient(to bottom, transparent 60%, #1a1e24 100%) !important;
+    }
+    .content-wrapper {
+      padding: 2rem;
+    }
+  }
+</style>
