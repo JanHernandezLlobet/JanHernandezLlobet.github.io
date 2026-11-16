@@ -1,0 +1,23 @@
+/* src/styles/theme.css */
+
+:root {
+  /* === MODO DÍA (Por defecto) === */
+  --bg-primary: #ffffff;          /* Fondo principal de la página */
+  --bg-secondary: #f3f4f6;        /* Fondo de tarjetas, etiquetas o degradados */
+  --text-primary: #111827;        /* Títulos y texto principal */
+  --text-secondary: #4b5563;      /* Subtítulos y descripciones */
+  --border-color: #e5e7eb;        /* Líneas divisorias y bordes */
+  --accent-primary: #2563eb;      /* Enlaces y botones principales */
+  --accent-secondary: #059669;    /* Acento secundario (demos, badges) */
+}
+
+[data-theme="dark"] {
+  /* === MODO NOCHE === */
+  --bg-primary: #111827;          /* Fondo oscuro principal */
+  --bg-secondary: #1a1e24;        /* Fondo para degradados de hobbies y tarjetas */
+  --text-primary: #f9fafb;        /* Texto principal claro */
+  --text-secondary: #9ca3af;      /* Texto secundario gris suave */
+  --border-color: #374151;        /* Bordes sutiles en oscuro */
+  --accent-primary: #60a5fa;      /* Azul más luminoso para contraste en oscuro */
+  --accent-secondary: #34d399;    /* Verde luminoso */
+}

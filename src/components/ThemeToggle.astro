@@ -1,0 +1,35 @@
+---
+---
+<button id="theme-toggle" aria-label="Cambiar tema día/noche">
+  <span class="icon-sun">☀️</span>
+  <span class="icon-moon">🌙</span>
+</button>
+
+<style>
+  button {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  /* Muestra el sol en modo noche y la luna en modo día */
+  :global([data-theme="dark"]) .icon-moon { display: none; }
+  :global([data-theme="light"]) .icon-sun,
+  :global(:root:not([data-theme="dark"])) .icon-sun { display: none; }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('theme-toggle');
+
+  toggleBtn?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  });
+</script>

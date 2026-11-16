@@ -2,6 +2,9 @@
 const currentPath = Astro.url.pathname;
 ---
 
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+
 <header>
   <nav>
     <a href="/" class="logo">Jan Hernandez</a>
@@ -9,6 +12,7 @@ const currentPath = Astro.url.pathname;
       <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Inicio</a></li>
       <li><a href="/proyectos" class={currentPath === '/proyectos' ? 'active' : ''}>Proyectos</a></li>
       <li><a href="/sobre-mi" class={currentPath === '/sobre-mi' ? 'active' : ''}>Sobre mí</a></li>
+      <ThemeToggle>
     </ul>
   </nav>
 </header>

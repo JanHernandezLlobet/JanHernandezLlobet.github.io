@@ -1,6 +1,7 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import '../styles/theme.css'; // <-- Importamos tu archivo de colores
 
 interface Props {
   title: string;
@@ -17,27 +18,35 @@ const { title, description = "Web personal y portfolio" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+
+    <!-- Script inline para aplicar el tema guardado antes de renderizar el body -->
+    <script is:inline>
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
   </head>
   <body>
     <Navbar />
-    
     <main>
       <slot />
     </main>
-
     <Footer />
   </body>
 </html>
 
 <style is:global>
-  /* Estilos globales básicos para mantener el footer abajo */
   body {
     font-family: system-ui, -apple-system, sans-serif;
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: #1f2937;
+    /* Usamos las variables de theme.css */
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
   main {
     flex: 1;

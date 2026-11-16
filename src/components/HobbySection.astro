@@ -42,7 +42,7 @@ const isEven = index % 2 === 0;
     
     display: flex;
     flex-direction: row; /* Imagen izquierda, texto derecha por defecto */
-    background-color: #1a1e24; /* Color de fondo oscuro continuo */
+    background-color: var(--bg-secondary); 
     overflow: hidden;
   }
 
@@ -63,13 +63,13 @@ const isEven = index % 2 === 0;
     position: absolute;
     inset: 0;
     /* Degradado de transparente (izquierda) a oscuro (derecha) */
-    background: linear-gradient(to right, transparent 50%, #1a1e24 100%);
-  }
+    background: linear-gradient(to right, transparent 50%, var(--bg-secondary) 100%);  
+    }
 
   /* Si la sección está invertida, el degradado va en sentido contrario */
   .hobby-section.reverse .gradient-overlay {
-    background: linear-gradient(to left, transparent 50%, #1a1e24 100%);
-  }
+    background: linear-gradient(to left, transparent 50%, var(--bg-secondary) 100%);  
+    }
 
   .content-wrapper {
     flex: 1; /* Ocupa el espacio restante */
@@ -99,7 +99,7 @@ const isEven = index % 2 === 0;
   }
 
   p {
-    color: #9ca3af;
+    color: var(--text-secondary);
     font-size: 1.1rem;
     line-height: 1.6;
     margin: 0;
