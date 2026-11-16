@@ -1,0 +1,95 @@
+---
+interface TimelineEntry {
+  period: string;
+  title: string;
+  institution: string;
+  points: string[];
+}
+
+interface TimelineGroup {
+  title: string;
+  entries: TimelineEntry[];
+}
+
+interface Props {
+  groups?: TimelineGroup[];
+}
+
+const defaultGroups: TimelineGroup[] = [
+  {
+    title: 'Formación',
+    entries: [
+      {
+        period: 'Fechas por confirmar · Actualidad',
+        title: 'Máster IMA en Inteligencia Artificial',
+        institution: 'Université de Toulouse',
+        points: ['Formación de posgrado en inteligencia artificial.', 'Profundización en aprendizaje automático y modelos de lenguaje.'],
+      },
+      {
+        period: 'Fechas por completar',
+        title: 'Grado previo · añadir especialidad',
+        institution: 'Institución por completar',
+        points: ['Añade aquí el nombre oficial del grado.', 'Completa las fechas y una materia o logro relevante.'],
+      },
+    ],
+  },
+  {
+    title: 'Proyectos e investigación',
+    entries: [
+      {
+        period: '2025 — 2026',
+        title: 'Proyectos personales de inteligencia artificial',
+        institution: 'Desarrollo independiente',
+        points: ['Prototipo de clasificación de imágenes médicas con Vision Transformers.', 'Sistema RAG con embeddings locales y búsqueda híbrida.', 'Comparación de algoritmos de búsqueda en grafos con C++.'],
+      },
+    ],
+  },
+];
+
+const { groups = defaultGroups } = Astro.props;
+---
+
+<section class="timeline-section" aria-labelledby="timeline-title">
+  <header class="section-heading">
+    <p class="eyebrow">Recorrido</p>
+    <h2 id="timeline-title">Formación y experiencia</h2>
+  </header>
+  <div class="groups">
+    {groups.map((group) => (
+      <section class="timeline-group" aria-label={group.title}>
+        <h3>{group.title}</h3>
+        <ol>
+          {group.entries.map((entry) => (
+            <li class="timeline-entry">
+              <article>
+                <p class="period">{entry.period}</p>
+                <h4>{entry.title}</h4>
+                <p class="institution">{entry.institution}</p>
+                <ul>{entry.points.map((point) => <li>{point}</li>)}</ul>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+</section>
+
+<style>
+  .timeline-section { margin: 3.5rem 0; }
+  .section-heading { margin-bottom: 1.5rem; }
+  .eyebrow { margin: 0 0 .45rem; color: var(--accent-primary); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  h2 { margin: 0; color: var(--text-primary); font-size: clamp(1.6rem, 3vw, 2rem); letter-spacing: -.03em; }
+  .groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  h3 { margin: 0 0 1rem; color: var(--text-primary); font-size: 1.05rem; }
+  ol { margin: 0; padding: 0 0 0 1.25rem; list-style: none; border-left: 2px solid var(--border-color); }
+  .timeline-entry { position: relative; padding: 0 0 1.4rem 1.1rem; }
+  .timeline-entry:last-child { padding-bottom: 0; }
+  .timeline-entry::before { position: absolute; top: .22rem; left: -.43rem; width: .7rem; height: .7rem; border: 2px solid var(--bg-primary); border-radius: 50%; background: var(--accent-primary); content: ''; }
+  article { padding: 1rem; border: 1px solid var(--border-color); border-radius: .75rem; background: var(--bg-primary); }
+  .period { margin: 0 0 .55rem; color: var(--accent-primary); font: .75rem/1.5 monospace; }
+  h4 { margin: 0; color: var(--text-primary); font-size: 1rem; line-height: 1.4; }
+  .institution { margin: .25rem 0 .75rem; color: var(--text-secondary); font-size: .88rem; }
+  article ul { margin: 0; padding-left: 1.1rem; color: var(--text-secondary); font-size: .85rem; line-height: 1.6; }
+  @media (max-width: 720px) { .groups { grid-template-columns: 1fr; } }
+</style>

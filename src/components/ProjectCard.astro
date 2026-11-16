@@ -48,11 +48,11 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
     flex-direction: column;
     justify-content: space-between;
     background-color: var(--bg-primary);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, border-color 0.15s ease;
   }
   .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow-color);
+    border-color: var(--accent-primary);
   }
   .card-header {
     display: flex;
@@ -68,7 +68,7 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
   }
   .year {
     font-size: 0.85rem;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     font-family: monospace;
   }
   .description {
