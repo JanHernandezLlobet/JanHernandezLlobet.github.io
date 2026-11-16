@@ -1,18 +1,20 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import '../styles/theme.css'; // <-- Importamos tu archivo de colores
+import { getLangFromUrl, type Locale } from '../i18n/utils';
+import '../styles/theme.css';
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Locale;
 }
 
-const { title, description = "Web personal y portfolio" } = Astro.props;
+const { title, description = 'Web personal y portfolio', lang = getLangFromUrl(Astro.url) } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,11 +30,11 @@ const { title, description = "Web personal y portfolio" } = Astro.props;
     </script>
   </head>
   <body>
-    <Navbar />
+    <Navbar lang={lang} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>
 
@@ -46,7 +48,6 @@ const { title, description = "Web personal y portfolio" } = Astro.props;
     /* Usamos las variables de theme.css */
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    transition: background-color 0.2s ease, color 0.2s ease;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
   main {

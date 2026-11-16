@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations, type Locale } from '../i18n/utils';
+
 interface TimelineEntry {
   period: string;
   title: string;
@@ -12,47 +14,19 @@ interface TimelineGroup {
 }
 
 interface Props {
+  lang?: Locale;
   groups?: TimelineGroup[];
 }
 
-const defaultGroups: TimelineGroup[] = [
-  {
-    title: 'Formación',
-    entries: [
-      {
-        period: 'Fechas por confirmar · Actualidad',
-        title: 'Máster IMA en Inteligencia Artificial',
-        institution: 'Université de Toulouse',
-        points: ['Formación de posgrado en inteligencia artificial.', 'Profundización en aprendizaje automático y modelos de lenguaje.'],
-      },
-      {
-        period: 'Fechas por completar',
-        title: 'Grado previo · añadir especialidad',
-        institution: 'Institución por completar',
-        points: ['Añade aquí el nombre oficial del grado.', 'Completa las fechas y una materia o logro relevante.'],
-      },
-    ],
-  },
-  {
-    title: 'Proyectos e investigación',
-    entries: [
-      {
-        period: '2025 — 2026',
-        title: 'Proyectos personales de inteligencia artificial',
-        institution: 'Desarrollo independiente',
-        points: ['Prototipo de clasificación de imágenes médicas con Vision Transformers.', 'Sistema RAG con embeddings locales y búsqueda híbrida.', 'Comparación de algoritmos de búsqueda en grafos con C++.'],
-      },
-    ],
-  },
-];
-
-const { groups = defaultGroups } = Astro.props;
+const { lang = getLangFromUrl(Astro.url), groups: groupOverride } = Astro.props;
+const t = useTranslations(lang);
+const groups = groupOverride ?? t.timeline.groups;
 ---
 
 <section class="timeline-section" aria-labelledby="timeline-title">
   <header class="section-heading">
-    <p class="eyebrow">Recorrido</p>
-    <h2 id="timeline-title">Formación y experiencia</h2>
+    <p class="eyebrow">{t.timeline.eyebrow}</p>
+    <h2 id="timeline-title">{t.timeline.title}</h2>
   </header>
   <div class="groups">
     {groups.map((group) => (

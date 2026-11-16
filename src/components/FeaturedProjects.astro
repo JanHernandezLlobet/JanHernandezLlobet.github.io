@@ -1,5 +1,6 @@
 ---
 import ProjectCard from './ProjectCard.astro';
+import { getLocalizedPath, getLangFromUrl, useTranslations, type Locale } from '../i18n/utils';
 
 interface Project {
   title: string;
@@ -11,46 +12,25 @@ interface Project {
 }
 
 interface Props {
+  lang?: Locale;
   projects?: Project[];
 }
 
-const defaultProjects: Project[] = [
-  {
-    title: 'Clasificador de imágenes médicas con ViT',
-    description: 'Fine-tuning de Vision Transformers y aumento de datos para detectar anomalías en imágenes médicas; enfocado en comparar sensibilidad y rendimiento del modelo.',
-    tags: ['PyTorch', 'Vision Transformers', 'Python', 'Computer Vision'],
-    repoUrl: 'https://github.com/JanHernandezLlobet/proyecto-vit',
-    year: '2026',
-  },
-  {
-    title: 'Sistema RAG sobre documentación técnica',
-    description: 'Pipeline de recuperación con embeddings locales y búsqueda híbrida para obtener respuestas trazables sobre documentación técnica.',
-    tags: ['LLM', 'RAG', 'LangChain', 'Vector DB'],
-    repoUrl: 'https://github.com/JanHernandezLlobet/rag-docs',
-    year: '2025',
-  },
-  {
-    title: 'Algoritmos de búsqueda en grafos',
-    description: 'Implementación y comparación de A*, Dijkstra y búsqueda bidireccional para analizar rendimiento en mapas reales.',
-    tags: ['C++', 'Algoritmos', 'Optimización'],
-    repoUrl: 'https://github.com/JanHernandezLlobet/graph-search',
-    year: '2025',
-  },
-];
-
-const { projects = defaultProjects } = Astro.props;
+const { lang = getLangFromUrl(Astro.url), projects: projectOverride } = Astro.props;
+const t = useTranslations(lang);
+const projects = projectOverride ?? t.featured.projects;
 ---
 
 <section class="featured-section" aria-labelledby="featured-title">
   <header class="section-heading">
     <div>
-      <p class="eyebrow">Selección de trabajo</p>
-      <h2 id="featured-title">Proyectos destacados</h2>
+      <p class="eyebrow">{t.featured.eyebrow}</p>
+      <h2 id="featured-title">{t.featured.title}</h2>
     </div>
-    <a class="all-projects" href="/proyectos/">Ver todos los proyectos <span aria-hidden="true">→</span></a>
+    <a class="all-projects" href={getLocalizedPath('/proyectos/', lang)}>{t.buttons.viewProjects} <span aria-hidden="true">→</span></a>
   </header>
   <div class="projects-grid">
-    {projects.map((project) => <ProjectCard {...project} />)}
+    {projects.map((project) => <ProjectCard {...project} lang={lang} />)}
   </div>
 </section>
 

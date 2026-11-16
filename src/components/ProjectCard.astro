@@ -1,5 +1,8 @@
 ---
+import { getLangFromUrl, useTranslations, type Locale } from '../i18n/utils';
+
 interface Props {
+  lang?: Locale;
   title: string;
   description: string;
   tags: string[];
@@ -8,7 +11,8 @@ interface Props {
   year?: string;
 }
 
-const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
+const { lang = getLangFromUrl(Astro.url), title, description, tags, repoUrl, demoUrl, year } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <article class="card">
@@ -28,12 +32,12 @@ const { title, description, tags, repoUrl, demoUrl, year } = Astro.props;
   <div class="links">
     {repoUrl && (
       <a href={repoUrl} target="_blank" rel="noopener noreferrer">
-        Código (GitHub) &rarr;
+        {t.buttons.code} &rarr;
       </a>
     )}
     {demoUrl && (
       <a href={demoUrl} target="_blank" rel="noopener noreferrer" class="demo-link">
-        Demo / Paper &rarr;
+        {t.buttons.demo} &rarr;
       </a>
     )}
   </div>

@@ -1,26 +1,25 @@
 ---
+import { getLangFromUrl, useTranslations, type Locale } from '../i18n/utils';
+
 interface Category {
   name: string;
   technologies: string[];
 }
 
 interface Props {
+  lang?: Locale;
   categories?: Category[];
 }
 
-const defaultCategories: Category[] = [
-  { name: 'IA & Machine Learning', technologies: ['PyTorch', 'Hugging Face Transformers', 'Scikit-learn', 'LangChain'] },
-  { name: 'Lenguajes', technologies: ['Python', 'C++', 'SQL', 'TypeScript'] },
-  { name: 'Herramientas & Entorno', technologies: ['Git', 'Docker', 'Linux', 'GitHub Actions'] },
-];
-
-const { categories = defaultCategories } = Astro.props;
+const { lang = getLangFromUrl(Astro.url), categories: categoryOverride } = Astro.props;
+const t = useTranslations(lang);
+const categories = categoryOverride ?? t.tech.categories;
 ---
 
 <section class="stack-section" aria-labelledby="stack-title">
   <header class="section-heading">
-    <p class="eyebrow">Herramientas de trabajo</p>
-    <h2 id="stack-title">Stack tecnológico</h2>
+    <p class="eyebrow">{t.tech.eyebrow}</p>
+    <h2 id="stack-title">{t.tech.title}</h2>
   </header>
   <div class="category-grid">
     {categories.map((category) => (

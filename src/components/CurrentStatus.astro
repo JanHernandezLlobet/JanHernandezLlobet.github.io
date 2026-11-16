@@ -1,34 +1,37 @@
 ---
+import { getLangFromUrl, useTranslations, type Locale } from '../i18n/utils';
+
 interface StatusMeta {
   label: string;
   value: string;
 }
 
 interface Props {
+  lang?: Locale;
   status?: string;
   metadata?: StatusMeta[];
   focusAreas?: string[];
 }
 
-const {
-  status = 'Buscando prácticas de fin de estudios (stage) y posiciones junior en inteligencia artificial.',
-  metadata = [
-    { label: 'Disponibilidad', value: 'A convenir' },
-    { label: 'Ubicación', value: 'Toulouse · Híbrido o remoto' },
-  ],
-  focusAreas = ['Machine Learning', 'NLP', 'Computer Vision', 'LLMs'],
-} = Astro.props;
+const { lang = getLangFromUrl(Astro.url), status: statusOverride, metadata: metadataOverride, focusAreas: focusAreasOverride } = Astro.props;
+const t = useTranslations(lang);
+const status = statusOverride ?? t.status.message;
+const metadata = metadataOverride ?? [
+  { label: t.status.availability, value: t.status.availabilityValue },
+  { label: t.status.location, value: t.status.locationValue },
+];
+const focusAreas = focusAreasOverride ?? t.status.focusAreas;
 
 const actions = [
-  { label: 'Descargar CV', href: '/cv.pdf', kind: 'primary', download: true },
-  { label: 'Contactar', href: '#contacto', kind: 'secondary', download: false },
+  { label: t.buttons.downloadCv, href: `/cv-${lang}.pdf`, kind: 'primary', download: true },
+  { label: t.buttons.contact, href: '#contacto', kind: 'secondary', download: false },
 ];
 ---
 
 <section class="status-section" aria-labelledby="status-title">
   <div class="status-card">
     <div class="status-main">
-      <p class="eyebrow">Estado actual</p>
+      <p class="eyebrow">{t.status.eyebrow}</p>
       <h2 id="status-title"><span class="availability-dot" aria-hidden="true"></span>{status}</h2>
       <dl class="metadata">
         {metadata.map((item) => (
@@ -38,7 +41,7 @@ const actions = [
           </div>
         ))}
       </dl>
-      <div class="focus-areas" aria-label="Áreas de enfoque">
+      <div class="focus-areas" aria-label={t.status.focus}>
         {focusAreas.map((area) => <span>{area}</span>)}
       </div>
     </div>

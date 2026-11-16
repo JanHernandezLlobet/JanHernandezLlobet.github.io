@@ -1,4 +1,6 @@
 ---
+import { getLocalizedPath, getLangFromUrl, useTranslations, type Locale } from '../i18n/utils';
+
 interface ContactLink {
   label: string;
   href: string;
@@ -6,20 +8,23 @@ interface ContactLink {
 }
 
 interface Props {
+  lang?: Locale;
   email?: string;
   linkedinUrl?: string;
   links?: ContactLink[];
 }
 
 const {
+  lang = getLangFromUrl(Astro.url),
   // Sustituye estos dos valores por tus datos públicos antes de publicar.
-  email = 'tu.email@ejemplo.com',
+  email = 'email@example.com',
   linkedinUrl = 'https://www.linkedin.com/in/tu-perfil/',
 } = Astro.props;
+const t = useTranslations(lang);
 
 const contactLinks: ContactLink[] = [
-  { label: 'GitHub', href: 'https://github.com/JanHernandezLlobet', external: true },
-  { label: 'LinkedIn', href: linkedinUrl, external: true },
+  { label: t.contact.github, href: 'https://github.com/JanHernandezLlobet', external: true },
+  { label: t.contact.linkedin, href: linkedinUrl, external: true },
 ];
 
 const { links = contactLinks } = Astro.props;
@@ -27,21 +32,21 @@ const { links = contactLinks } = Astro.props;
 
 <section id="contacto" class="contact-section" aria-labelledby="contact-title">
   <div class="hobby-banner">
-    <p>Fuera del trabajo</p>
-    <a href="/sobre-mi/#hobbies">Más allá del código: descubre mis hobbies <span aria-hidden="true">→</span></a>
+    <p>{t.contact.bannerEyebrow}</p>
+    <a href={`${getLocalizedPath('/sobre-mi/', lang)}#hobbies`}>{t.contact.bannerLink} <span aria-hidden="true">→</span></a>
   </div>
   <div class="contact-card">
     <div>
-      <p class="eyebrow">Hablemos</p>
-      <h2 id="contact-title">¿Tienes un proyecto en mente?</h2>
+      <p class="eyebrow">{t.contact.eyebrow}</p>
+      <h2 id="contact-title">{t.contact.title}</h2>
       <p class="email-address">{email}</p>
     </div>
     <div class="contact-actions">
-      <a class="email-link" href={`mailto:${email}`}>Escribir un correo</a>
-      <button class="copy-button" type="button" data-email={email}>Copiar email</button>
+      <a class="email-link" href={`mailto:${email}`}>{t.buttons.email}</a>
+      <button class="copy-button" type="button" data-email={email} data-copy-label={t.buttons.copyEmail} data-copied={t.buttons.copied} data-copy-failed={t.buttons.copyFailed}>{t.buttons.copyEmail}</button>
       <span class="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <nav class="social-links" aria-label="Perfiles profesionales">
+    <nav class="social-links" aria-label={t.contact.socialLabel}>
       {links.map((link) => (
         <a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
           {link.label} <span aria-hidden="true">↗</span>
@@ -58,11 +63,11 @@ const { links = contactLinks } = Astro.props;
       const email = button.dataset.email ?? '';
       try {
         await navigator.clipboard.writeText(email);
-        if (status) status.textContent = 'Email copiado';
-        button.textContent = 'Copiado';
-        window.setTimeout(() => { button.textContent = 'Copiar email'; if (status) status.textContent = ''; }, 2200);
+        if (status) status.textContent = button.dataset.copied ?? '';
+        button.textContent = button.dataset.copied ?? '';
+        window.setTimeout(() => { button.textContent = button.dataset.copyLabel ?? ''; if (status) status.textContent = ''; }, 2200);
       } catch {
-        if (status) status.textContent = 'No se pudo copiar. Selecciona el email para copiarlo.';
+        if (status) status.textContent = button.dataset.copyFailed ?? '';
       }
     });
   });
