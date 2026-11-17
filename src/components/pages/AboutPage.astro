@@ -7,7 +7,7 @@ interface Props { lang?: Locale }
 const { lang = getLangFromUrl(Astro.url) } = Astro.props;
 const t = useTranslations(lang);
 const imageUrls = ['/images/cirque.jpg', '/images/codigo.jpg', '/images/drone.JPG'];
-const hobbies = t.about.hobbies.map((hobby, index) => ({ ...hobby, imageUrl: imageUrls[index] }));
+const hobbies = t.about.hobbies.map((hobby, index) => ({ ...hobby, imageUrl: hobby.imageUrl ?? imageUrls[index] ?? imageUrls[0] }));
 ---
 
 <Layout title={`${t.about.title} | Jan Hernandez`} description={t.about.description} lang={lang}>

@@ -31,7 +31,7 @@ export interface UiCopy {
   timeline: { eyebrow: string; title: string; groups: TimelineGroupCopy[] };
   contact: { bannerEyebrow: string; bannerLink: string; eyebrow: string; title: string; socialLabel: string; github: string; linkedin: string };
   projectsPage: { title: string; description: string };
-  about: { title: string; description: string; hobbiesTitle: string; hobbies: { title: string; description: string }[]; closingEyebrow: string; closing: string };
+  about: { title: string; description: string; hobbiesTitle: string; hobbies: { title: string; description: string; imageUrl?: string }[]; closingEyebrow: string; closing: string };
   footer: { rights: string };
 }
 
@@ -102,10 +102,12 @@ export const ui: Record<Locale, UiCopy> = {
     contact: { bannerEyebrow: 'En dehors du travail', bannerLink: 'Au-delà du code : découvrir mes loisirs', eyebrow: 'Échangeons', title: 'Un projet en tête ?', socialLabel: 'Profils professionnels', github: 'GitHub', linkedin: 'LinkedIn' },
     projectsPage: { title: 'Projets', description: 'Sélection de projets en intelligence artificielle et développement.' },
     about: { title: 'À propos', description: 'Découvrez un peu mieux Jan et ses loisirs.', hobbiesTitle: 'Mes loisirs', hobbies: [
-      { title: 'Randonnée', description: 'J’explore des sentiers de montagne et des chemins naturels le week-end. Me perdre dans les Pyrénées est ma façon préférée de déconnecter.' },
-      { title: 'Programmation', description: 'Je développe des projets personnels et explore de nouvelles technologies. J’aime expérimenter avec l’intelligence artificielle et l’automatisation.' },
-      { title: 'Audiovisuel et drones', description: 'Je capture des instants, des paysages et la lumière naturelle des villes. La caméra m’apprend à regarder le monde autrement.' },
-    ], closingEyebrow: 'Et toujours de nouvelles découvertes', closing: 'Entre les randonnées, les projets et les nouvelles idées, chaque passion m’offre une façon différente d’apprendre.' },
+      { title: 'Randonnée', description: 'J’aime me perdre en montagne et marcher dans des milieux naturels. Généralement, ma destination sont les Pyrénées où j’ai pu découvrir plein de paysages divers et variés.', imageUrl: '/images/cirque.jpg' },
+      { title: 'L’ultimate', description: 'Je pratique l’ultimate au TUC (Toulouse Universitary Club) au sein de l’équipe BTR.', imageUrl: '/images/ultimate.jpg' },
+      { title: 'Audiovisuel et drones', description: 'Le pilotage de drones est une activité qui me passion depuis petit. Bien que j’ai laissé un peu de côté durant mon adolescence, je m’y intéresse particulièrement actuellement.', imageUrl: '/images/drone.JPG' },
+      { title: 'Jeux vidéo', description: 'Les jeux vidéos ont été depuis toujours été pour moi un univers alternatif plein de possibilités. En tant que joueur ou que créateur/développeur, je m’investis à 100%.', imageUrl: '/images/supermario.jpg' },
+
+    ], closingEyebrow: 'Et toujours de nouvelles découvertes', closing: 'Entre les sports, les activités créatives, les projets et les nouvelles idées, chaque passion m’offre une façon différente d’apprendre et de m’épanouir.' },
     footer: { rights: 'Tous droits réservés.' },
   },
   en: {
