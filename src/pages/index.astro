@@ -5,31 +5,35 @@ import FeaturedProjects from '../components/FeaturedProjects.astro';
 import TechStack from '../components/TechStack.astro';
 import Timeline from '../components/Timeline.astro';
 import ContactSection from '../components/ContactSection.astro';
+import { getLocalizedPath, useTranslations } from '../i18n/utils';
+
+const lang = 'fr';
+const t = useTranslations(lang);
 ---
 
-<Layout title="Inicio | Jan Hernandez" description="Página personal de Jan Hernandez" lang="es">
+<Layout title={`${t.hero.title} | Jan Hernandez`} description={t.hero.description} lang={lang}>
   <section class="intro" aria-labelledby="about-title">
-    <div class="portrait-placeholder" role="img" aria-label="Espacio reservado para una foto de Jan">
+    <div class="portrait-placeholder" role="img" aria-label={t.hero.photoAlt}>
       <svg viewBox="0 0 64 64" aria-hidden="true">
         <circle cx="32" cy="22" r="12" />
         <path d="M10 57c1-13 10-20 22-20s21 7 22 20" />
       </svg>
-      <span>Tu foto aquí</span>
-      <small>Guárdala en <code>public/images/</code> y sustituye este espacio</small>
+      <span>{t.hero.photoAlt}</span>
+      <small>{t.hero.photoHint}</small>
     </div>
     <div class="intro-copy">
-      <p class="eyebrow">Un poco sobre mí</p>
-      <h1 id="about-title">¡Hola, soy Jan!</h1>
-      <p class="lead">Esta página es una pequeña ventana a las cosas que me gustan y a cómo disfruto mi tiempo fuera de los proyectos.</p>
-      <a class="scroll-link" href="/sobre-mi/#hobbies">Descubre mis hobbies <span aria-hidden="true">→</span></a>
+      <p class="eyebrow">{t.hero.eyebrow}</p>
+      <h1 id="about-title">{t.hero.title}</h1>
+      <p class="lead">{t.hero.description}</p>
+      <a class="scroll-link" href={`${getLocalizedPath('/sobre-mi/', lang)}#hobbies`}>{t.hero.hobbies} <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
-  <CurrentStatus lang="es" />
-  <FeaturedProjects lang="es" />
-  <TechStack lang="es" />
-  <Timeline lang="es" />
-  <ContactSection lang="es" />
+  <CurrentStatus lang={lang} />
+  <FeaturedProjects lang={lang} />
+  <TechStack lang={lang} />
+  <Timeline lang={lang} />
+  <ContactSection lang={lang} />
 </Layout>
 
 <style>

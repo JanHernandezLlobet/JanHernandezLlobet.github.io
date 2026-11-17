@@ -1,8 +1,8 @@
 import { ui, type Locale } from './ui';
 export type { Locale } from './ui';
 
-export const locales = ['es', 'fr', 'en'] as const satisfies readonly Locale[];
-export const defaultLocale: Locale = 'es';
+export const locales = ['fr', 'es', 'en'] as const satisfies readonly Locale[];
+export const defaultLocale: Locale = 'fr';
 
 export function getLangFromUrl(url: URL): Locale {
   const firstSegment = url.pathname.split('/').filter(Boolean)[0];
