@@ -10,6 +10,7 @@ interface ContactLink {
 interface Props {
   lang?: Locale;
   email?: string;
+  phone?: string;
   linkedinUrl?: string;
   links?: ContactLink[];
 }
@@ -18,6 +19,7 @@ const {
   lang = getLangFromUrl(Astro.url),
   // Sustituye estos dos valores por tus datos públicos antes de publicar.
   email = 'janherllo2015@gmail.com',
+  phone = '+33 7 81 67 95 97',
   linkedinUrl = 'https://www.linkedin.com/in/tu-perfil/',
 } = Astro.props;
 const t = useTranslations(lang);
@@ -39,7 +41,10 @@ const { links = contactLinks } = Astro.props;
     <div>
       <p class="eyebrow">{t.contact.eyebrow}</p>
       <h2 id="contact-title">{t.contact.title}</h2>
-      <p class="email-address">{email}</p>
+      <div class="contact-details">
+        <a class="email-address" href={`mailto:${email}`}>{email}</a>
+        <a class="phone-number" href="tel:+33781679597"><span>{t.contact.phoneLabel}:</span> {phone}</a>
+      </div>
     </div>
     <div class="contact-actions">
       <a class="email-link" href={`mailto:${email}`}>{t.buttons.email}</a>
@@ -83,7 +88,9 @@ const { links = contactLinks } = Astro.props;
   .contact-card { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem 2rem; padding: clamp(1.25rem, 4vw, 2rem); border: 1px solid var(--border-color); border-radius: 1rem; background: var(--bg-primary); }
   .eyebrow { margin: 0 0 .45rem; color: var(--accent-primary); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
   h2 { margin: 0; color: var(--text-primary); font-size: clamp(1.35rem, 3vw, 1.8rem); }
-  .email-address { margin: .5rem 0 0; color: var(--text-secondary); }
+  .contact-details { display: grid; justify-items: start; gap: .35rem; margin-top: .65rem; }
+  .email-address, .phone-number { color: var(--text-secondary); font-size: .9rem; font-weight: 450; }
+  .phone-number span { color: var(--text-primary); font-weight: 600; }
   .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
   .email-link, .copy-button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.65rem; padding: .55rem .85rem; border: 1px solid var(--accent-primary); border-radius: .5rem; background: transparent; color: var(--accent-primary); font: 600 .85rem system-ui, sans-serif; text-decoration: none; cursor: pointer; }
   .email-link { background: var(--accent-primary); color: var(--bg-primary); }

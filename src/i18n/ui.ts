@@ -29,7 +29,7 @@ export interface UiCopy {
   featured: { eyebrow: string; title: string; projects: ProjectCopy[] };
   tech: { eyebrow: string; title: string; categories: { name: string; technologies: string[] }[] };
   timeline: { eyebrow: string; title: string; groups: TimelineGroupCopy[] };
-  contact: { bannerEyebrow: string; bannerLink: string; eyebrow: string; title: string; socialLabel: string; github: string; linkedin: string };
+  contact: { bannerEyebrow: string; bannerLink: string; eyebrow: string; title: string; socialLabel: string; github: string; linkedin: string; phoneLabel: string };
   projectsPage: { title: string; description: string };
   about: { title: string; description: string; hobbiesTitle: string; hobbies: { title: string; description: string; imageUrl?: string }[]; closingEyebrow: string; closing: string };
   footer: { rights: string };
@@ -38,7 +38,7 @@ export interface UiCopy {
 export const ui: Record<Locale, UiCopy> = {
   es: {
     nav: { home: 'Inicio', projects: 'Proyectos', about: 'Sobre mí', language: 'Idioma', theme: 'Cambiar tema día/noche' },
-    buttons: { downloadCv: 'Descargar CV', contact: 'Contactar', viewProjects: 'Ver todos los proyectos', email: 'Escribir un correo', copyEmail: 'Copiar email', copied: 'Email copiado', copyFailed: 'No se pudo copiar. Selecciona el email para copiarlo.', code: 'Código (GitHub)', demo: 'Demo / artículo' },
+    buttons: { downloadCv: 'Descargar CV en francés', contact: 'Contactar', viewProjects: 'Ver todos los proyectos', email: 'Escribir un correo', copyEmail: 'Copiar email', copied: 'Email copiado', copyFailed: 'No se pudo copiar. Selecciona el email para copiarlo.', code: 'Código (GitHub)', demo: 'Demo / artículo' },
     hero: { eyebrow: 'Un poco sobre mí', title: '¡Hola, soy Jan!', description: 'Esta página es una pequeña ventana a las cosas que me gustan y a cómo disfruto mi tiempo fuera de los proyectos.', hobbies: 'Descubre mis hobbies', photoAlt: 'Espacio reservado para una foto de Jan', photoHint: 'Guárdala en public/images/ y sustituye este espacio' },
     status: { eyebrow: 'Estado actual', message: 'Buscando prácticas de fin de estudios (stage) y posiciones junior en inteligencia artificial.', availability: 'Disponibilidad', availabilityValue: 'A convenir', location: 'Ubicación', locationValue: 'Toulouse · Híbrido o remoto', focus: 'Áreas de enfoque', focusAreas: ['Machine Learning', 'NLP', 'Computer Vision', 'LLMs'] },
     featured: {
@@ -63,7 +63,7 @@ export const ui: Record<Locale, UiCopy> = {
         { period: '2025 — 2026', title: 'Proyectos personales de inteligencia artificial', institution: 'Desarrollo independiente', points: ['Prototipo de clasificación de imágenes médicas con Vision Transformers.', 'Sistema RAG con embeddings locales y búsqueda híbrida.', 'Comparación de algoritmos de búsqueda en grafos con C++.'] },
       ] },
     ] },
-    contact: { bannerEyebrow: 'Fuera del trabajo', bannerLink: 'Más allá del código: descubre mis hobbies', eyebrow: 'Hablemos', title: '¿Tienes un proyecto en mente?', socialLabel: 'Perfiles profesionales', github: 'GitHub', linkedin: 'LinkedIn' },
+    contact: { bannerEyebrow: 'Fuera del trabajo', bannerLink: 'Más allá del código: descubre mis hobbies', eyebrow: 'Hablemos', title: '¿Tienes un proyecto en mente?', socialLabel: 'Perfiles profesionales', github: 'GitHub', linkedin: 'LinkedIn', phoneLabel: 'Teléfono' },
     projectsPage: { title: 'Proyectos', description: 'Selección de proyectos de inteligencia artificial y desarrollo.' },
     about: { title: 'Sobre mí', description: 'Conoce un poco más sobre Jan y sus aficiones.', hobbiesTitle: 'Mis hobbies', hobbies: [
       { title: 'Senderismo', description: 'Explorando rutas de alta montaña y senderos naturales los fines de semana. Perderse en los Pirineos es mi desconexión favorita.' },
@@ -80,9 +80,9 @@ export const ui: Record<Locale, UiCopy> = {
     featured: {
       eyebrow: 'Sélection de travaux', title: 'Projets à la une',
       projects: [
-        { title: 'Classification d’images médicales avec ViT', description: 'Ajustement fin de Vision Transformers et augmentation de données pour détecter des anomalies sur des images médicales, avec comparaison de la sensibilité et des performances du modèle.', tags: ['PyTorch', 'Vision Transformers', 'Python', 'Computer Vision'], repoUrl: 'https://github.com/JanHernandezLlobet/proyecto-vit', year: '2026' },
-        { title: 'Système RAG pour la documentation technique', description: 'Pipeline de recherche avec embeddings locaux et recherche hybride pour produire des réponses traçables à partir de documentation technique.', tags: ['LLM', 'RAG', 'LangChain', 'Vector DB'], repoUrl: 'https://github.com/JanHernandezLlobet/rag-docs', year: '2025' },
-        { title: 'Algorithmes de recherche dans les graphes', description: 'Implémentation et comparaison de A*, Dijkstra et de la recherche bidirectionnelle pour analyser leurs performances sur des cartes réelles.', tags: ['C++', 'Algorithmes', 'Optimisation'], repoUrl: 'https://github.com/JanHernandezLlobet/graph-search', year: '2025' },
+        { title: 'GRASP-WM: Modèle pour prises robotiques fiables', description: 'Projet de dernière année de Master. Le projet se divise en plusieurs parties. D’abord la creation d’un état de l’art sur les méthodes et modèles de prises (grasp) d’objets par des bras robotiques. Ensuite une implémentation ainsi qu’une phase de test est prévue.', tags: ['GRASP', 'VLM', 'ROS', 'python'], repoUrl: 'https://github.com/MaximeSabbah/grasp_project', year: '2026' },
+        { title: 'Reconnaissance sonore de défaillances industrielles', description: 'Projet de recherche basé sur le concours DCASE. Idée principale: à partir de sons enregistrés sur les machines, détecter une défaillance. Le projet débute par un traitement des données sonores, puis par un traitement de ces données afin de détecter des anomailes.', tags: ['Embeddings', 'Traitement sonore', 'Séries temporelles', 'python'], repoUrl: 'https://github.com/JanHernandezLlobet/rag-docs', year: '2026' },
+        { title: 'Étude conjecture de Syracuse', description: 'Recherche personnelle sur la conjecture de syracuse / conjecture de Collatz. Ce problème, bien qu’il possède un énoncé reste non résolu à ce jour. Mon approche consiste en un emploie des probabilités pour déterminer des trajectoires infinies.', tags: ['Statistiques', 'Probabilités'], repoUrl: 'https://github.com/JanHernandezLlobet/graph-search', year: '2023' },
       ],
     },
     tech: { eyebrow: 'Outils de travail', title: 'Stack technique', categories: [
@@ -99,7 +99,7 @@ export const ui: Record<Locale, UiCopy> = {
         { period: '2025 — 2026', title: 'Projets personnels en intelligence artificielle', institution: 'Projets indépendants', points: ['Prototype de classification d’images médicales avec Vision Transformers.', 'Système RAG avec embeddings locaux et recherche hybride.', 'Comparaison d’algorithmes de recherche dans les graphes en C++.'] },
       ] },
     ] },
-    contact: { bannerEyebrow: 'En dehors du travail', bannerLink: 'Au-delà du code : découvrir mes loisirs', eyebrow: 'Échangeons', title: 'Un projet en tête ?', socialLabel: 'Profils professionnels', github: 'GitHub', linkedin: 'LinkedIn' },
+    contact: { bannerEyebrow: 'En dehors du travail', bannerLink: 'Au-delà du code : découvrir mes loisirs', eyebrow: 'Échangeons', title: 'Un projet en tête ?', socialLabel: 'Profils professionnels', github: 'GitHub', linkedin: 'LinkedIn', phoneLabel: 'Téléphone' },
     projectsPage: { title: 'Projets', description: 'Sélection de projets en intelligence artificielle et développement.' },
     about: { title: 'À propos', description: 'Découvrez un peu mieux Jan et ses loisirs.', hobbiesTitle: 'Mes loisirs', hobbies: [
       { title: 'Randonnée', description: 'J’aime me perdre en montagne et marcher dans des milieux naturels. Généralement, ma destination sont les Pyrénées où j’ai pu découvrir plein de paysages divers et variés.', imageUrl: '/images/cirque.jpg' },
@@ -112,13 +112,13 @@ export const ui: Record<Locale, UiCopy> = {
   },
   en: {
     nav: { home: 'Home', projects: 'Projects', about: 'About me', language: 'Language', theme: 'Toggle light/dark theme' },
-    buttons: { downloadCv: 'Download CV', contact: 'Contact me', viewProjects: 'View all projects', email: 'Send an email', copyEmail: 'Copy email', copied: 'Email copied', copyFailed: 'Could not copy. Select the address to copy it.', code: 'Source (GitHub)', demo: 'Demo / paper' },
+    buttons: { downloadCv: 'Download French CV', contact: 'Contact me', viewProjects: 'View all projects', email: 'Send an email', copyEmail: 'Copy email', copied: 'Email copied', copyFailed: 'Could not copy. Select the address to copy it.', code: 'Source (GitHub)', demo: 'Demo / paper' },
     hero: { eyebrow: 'A little about me', title: 'Hi, I’m Jan!', description: 'This page is a small window into the things I enjoy and how I spend my time outside of projects.', hobbies: 'Discover my hobbies', photoAlt: 'Placeholder for a photo of Jan', photoHint: 'Add it to public/images/ to replace this placeholder' },
     status: { eyebrow: 'Current status', message: 'Looking for a final-year internship or a junior role in artificial intelligence.', availability: 'Availability', availabilityValue: 'Flexible', location: 'Location', locationValue: 'Toulouse · Hybrid or remote', focus: 'Focus areas', focusAreas: ['Machine Learning', 'NLP', 'Computer Vision', 'LLMs'] },
     featured: {
       eyebrow: 'Selected work', title: 'Featured projects',
       projects: [
-        { title: 'Medical image classifier with ViT', description: 'Fine-tuning Vision Transformers with data augmentation to detect anomalies in medical images, focusing on comparing model sensitivity and performance.', tags: ['PyTorch', 'Vision Transformers', 'Python', 'Computer Vision'], repoUrl: 'https://github.com/JanHernandezLlobet/proyecto-vit', year: '2026' },
+        { title: 'GRASP-WM: A Robot-Aware World Model for Reliable Grasping', description: 'Fine-tuning Vision Transformers with data augmentation to detect anomalies in medical images, focusing on comparing model sensitivity and performance.', tags: ['PyTorch', 'Vision Transformers', 'Python', 'Computer Vision'], repoUrl: 'https://github.com/JanHernandezLlobet/proyecto-vit', year: '2026' },
         { title: 'RAG system for technical documentation', description: 'A retrieval pipeline using local embeddings and hybrid search to produce traceable answers from technical documentation.', tags: ['LLM', 'RAG', 'LangChain', 'Vector DB'], repoUrl: 'https://github.com/JanHernandezLlobet/rag-docs', year: '2025' },
         { title: 'Graph search algorithms', description: 'Implementation and comparison of A*, Dijkstra, and bidirectional search to study performance on real-world maps.', tags: ['C++', 'Algorithms', 'Optimization'], repoUrl: 'https://github.com/JanHernandezLlobet/graph-search', year: '2025' },
       ],
@@ -137,7 +137,7 @@ export const ui: Record<Locale, UiCopy> = {
         { period: '2025 — 2026', title: 'Personal artificial intelligence projects', institution: 'Independent projects', points: ['Medical image classification prototype using Vision Transformers.', 'RAG system with local embeddings and hybrid search.', 'Comparison of graph search algorithms in C++.'] },
       ] },
     ] },
-    contact: { bannerEyebrow: 'Outside of work', bannerLink: 'Beyond code: discover my hobbies', eyebrow: 'Let’s talk', title: 'Have a project in mind?', socialLabel: 'Professional profiles', github: 'GitHub', linkedin: 'LinkedIn' },
+    contact: { bannerEyebrow: 'Outside of work', bannerLink: 'Beyond code: discover my hobbies', eyebrow: 'Let’s talk', title: 'Have a project in mind?', socialLabel: 'Professional profiles', github: 'GitHub', linkedin: 'LinkedIn', phoneLabel: 'Phone' },
     projectsPage: { title: 'Projects', description: 'Selected artificial intelligence and software development projects.' },
     about: { title: 'About me', description: 'Learn a little more about Jan and his hobbies.', hobbiesTitle: 'My hobbies', hobbies: [
       { title: 'Hiking', description: 'I explore mountain routes and nature trails on weekends. Getting lost in the Pyrenees is my favourite way to switch off.' },
